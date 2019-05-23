@@ -124,7 +124,7 @@ stream = {
         return C.tableToStream(table, null);
     };
     !nofilter edge_stream;
-    timer;
+    ?timer timer;
 }
 
 // FIXME add more...
@@ -458,7 +458,7 @@ $root = {
             return C.makeProgram(new Ast.Statement.Rule(stream, [C.notifyAction()]));
     };
 
-    rule:timer_rule => C.makeProgram(rule);
+    timer? rule:timer_rule => C.makeProgram(rule);
 
     // when => do
     !primonly rule:complete_when_do_rule => C.makeProgram(rule);

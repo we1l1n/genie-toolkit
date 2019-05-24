@@ -57,7 +57,7 @@ two_filter_table = {
     };
 }
 with_filtered_table = {
-    complete_table;
+    !wikidata complete_table;
 
     !nofilter table:complete_table ('with' | 'having') filter:with_filter => {
         if (!table.schema.is_list)

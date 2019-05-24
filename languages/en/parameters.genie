@@ -91,15 +91,19 @@ single_stream_projection_Entity__tt__picture = 'new' table:complete_table => {
 the_out_param_Numeric = {
     'the' p:out_param_Numeric => p;
     !turking {
-        'its' p:out_param_Numeric => p;
-        'their' p:out_param_Numeric => p;
+        !wikidata {
+            'its' p:out_param_Numeric => p;
+            'their' p:out_param_Numeric => p;
+        }
     }
 }
 the_out_param_Array__Any = {
     'the' p:out_param_Array__Any => p;
     !turking {
-        'its' p:out_param_Array__Any => p;
-        'their' p:out_param_Array__Any => p;
+        !wikidata {
+            'its' p:out_param_Array__Any => p;
+            'their' p:out_param_Array__Any => p;
+        }
     }
 }
 
@@ -111,8 +115,10 @@ for (let [typestr, type] of $options.types.all) {
             'the' p:$('out_param_' + typestr) => p;
 
             !turking {
-                'its' p:$('out_param_' + typestr) => p;
-                'their' p:$('out_param_' + typestr) => p;
+                !wikidata {
+                    'its' p:$('out_param_' + typestr) => p;
+                    'their' p:$('out_param_' + typestr) => p;
+                }
             }
         }
 

@@ -151,14 +151,20 @@ range_filter = {
 }
 
 with_filter = {
-    p:out_param_Any 'equal to' x:constant_Any => {
+    !turking p:out_param_Any 'equal to' x:constant_Any => {
         if (x.getType().isString)
             return C.makeFilter($options, p, '=~', x);
         else
             return C.makeFilter($options, p, '==', x);
     };
-    !turking p:out_param_String ('containing' | 'including') x:constant_String => C.makeFilter($options, p, '=~', x);
+    !turking p:out_param_String ('is' | 'equals to' | 'being' ) x:constant_String => C.makeFilter($options, p, '=~', x);
     !turking x:constant_String ('in the' | 'in its' | 'in their') p:out_param_String => C.makeFilter($options, p, '=~', x);
+
+    // there are too few arrays, so keep both
+    p:out_param_Array__Any 'contain' x:constant_Any => C.makeFilter($options, p, 'contains', x);
+    p:out_param_Array__Any 'do not contain' x:constant_Any => C.makeFilter($options, p, 'contains', x, true);
+    p:out_param_Array__Any 'include' x:constant_Any => C.makeFilter($options, p, 'contains', x);
+    p:out_param_Array__Any 'do not include' x:constant_Any => C.makeFilter($options, p, 'contains', x, true);
 
     p:out_param_Numeric ('higher' | 'larger' | 'bigger') 'than' x:constant_Numeric => C.makeFilter($options, p, '>=', x);
     p:out_param_Numeric ('smaller' | 'lower') 'than' x:constant_Numeric => C.makeFilter($options, p, '<=', x);
